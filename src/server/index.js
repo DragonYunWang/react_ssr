@@ -2,6 +2,8 @@ import React from 'react'
 import express from 'express'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import getStore from '../store/'
 import routes from '../Routes'
 // 客户端渲染
 // React代码在浏览器上执行, 消耗的是用户浏览器的性能
@@ -14,7 +16,11 @@ const app = express()
 app.use(express.static('public'))
 
 app.get('*', (req, res) => {
-  const content = renderToString(<StaticRouter context={{}}>{routes}</StaticRouter>)
+  const content = renderToString(
+    <Provider store={getStore()}>
+      <StaticRouter context={{}}>{routes}</StaticRouter>
+    </Provider>
+  )
   res.send(
     `<!DOCTYPE html>
     <html lang="en">
