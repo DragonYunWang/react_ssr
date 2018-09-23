@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { renderRoutes, matchRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
+import proxy from 'express-http-proxy'
 import { getServerStore } from '../store'
 import routes from '../Routes'
 // 客户端渲染
@@ -16,12 +17,26 @@ const app = express()
 // 使用静态资源文件
 app.use(express.static('public'))
 
+// 服务器代理
+// /api/news.json
+// req.url = new.json
+// proxyReqPathResolver: /ssr/api/news.json
+// http://47.95.113.63 + proxyReqPathResolver()
+// http://47.95.113.63/ssr/api/news.json
+app.use(
+  '/api',
+  proxy('http://47.95.113.63', {
+    proxyReqPathResolver: function(req) {
+      return '/ssr/api' + req.url
+    }
+  })
+)
+
 app.get('*', (req, res) => {
   // 创建 store
-  const store = getServerStore()
+  const store = getServerStore(req)
   // 匹配多级路由
   const matchedRoutes = matchRoutes(routes, req.path)
-  console.log('TCL: matchedRoutes', matchedRoutes)
   const promised = []
   // 遍历 matchedRoutes 获取数据
   matchedRoutes.map(item => {
