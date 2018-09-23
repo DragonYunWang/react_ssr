@@ -9,11 +9,22 @@ class Home extends PureComponent {
     return list.map(item => <div key={item.get('id')}>{item.get('title')}</div>)
   }
   render() {
-    return <div>Home{this.getList()}</div>
+    return (
+      <div>
+        Home
+        {this.getList()}
+      </div>
+    )
   }
   componentDidMount() {
-    this.props.getHomeList()
+    if (this.props.list.isEmpty()) {
+      this.props.getHomeList()
+    }
   }
+}
+
+Home.loadData = store => {
+  return store.dispatch(actionCreators.getHomeList())
 }
 
 const mapStateToProps = state => ({
