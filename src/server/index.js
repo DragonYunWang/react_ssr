@@ -1,12 +1,9 @@
-import React from 'react'
 import express from 'express'
-import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
-import { renderRoutes, matchRoutes } from 'react-router-config'
-import { Provider } from 'react-redux'
 import proxy from 'express-http-proxy'
+import { matchRoutes } from 'react-router-config'
 import { getServerStore } from '../store'
 import routes from '../Routes'
+import render from './utils'
 // 客户端渲染
 // React代码在浏览器上执行, 消耗的是用户浏览器的性能
 
@@ -46,36 +43,7 @@ app.get('*', (req, res) => {
   })
   // 让promised执行一次
   Promise.all(promised).then(() => {
-    const content = renderToString(
-      <Provider store={store}>
-        <StaticRouter location={req.path} context={{}}>
-          {/* 多级路由支持 */}
-          <div>{renderRoutes(routes)}</div>
-        </StaticRouter>
-      </Provider>
-    )
-    res.send(
-      `<!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>React Server</title>
-    </head>
-    
-    <body>
-      <div id="root">${content}</div>
-      <script>
-        // 服务端注水
-        window.context = ${JSON.stringify(store.getState())}
-      </script>
-      <script src="/index.js"></script>
-    </body>
-    
-    </html>`
-    )
+    res.send(render(req, routes, store))
   })
 })
 

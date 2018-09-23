@@ -1609,7 +1609,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _App = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _Home = __webpack_require__(/*! ./pages/Home/ */ \"./src/pages/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 修改路由配置,支持服务端获取数据\n// 多级路由支持\n\n// import React from 'react'\n// import { Route } from 'react-router-dom'\nexports.default = [{\n  path: '/',\n  component: _App2.default,\n  loadData: _App2.default.loadData,\n  routes: [{\n    path: '/',\n    component: _Home2.default,\n    exact: true,\n    loadData: _Home2.default.loadData,\n    key: 'Home'\n  }]\n}];\n\n// export default (\n//   <div>\n//     <Route to=\"/\" component={Home} />\n//   </div>\n// )\n\n//# sourceURL=webpack:///./src/Routes.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _App = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _Home = __webpack_require__(/*! ./pages/Home */ \"./src/pages/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _Translation = __webpack_require__(/*! ./pages/Translation */ \"./src/pages/Translation/index.js\");\n\nvar _Translation2 = _interopRequireDefault(_Translation);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 修改路由配置,支持服务端获取数据\n// 多级路由支持\n\nexports.default = [{\n  path: '/',\n  component: _App2.default,\n  loadData: _App2.default.loadData,\n  routes: [{\n    path: '/',\n    component: _Home2.default,\n    exact: true,\n    loadData: _Home2.default.loadData,\n    key: 'Home'\n  }, {\n    path: '/translation',\n    component: _Translation2.default,\n    exact: true,\n    loadData: _Translation2.default.loadData,\n    key: 'Translation'\n  }]\n}];\n\n// export default (\n//   <div>\n//     <Route to=\"/\" component={Home} />\n//   </div>\n// )\n// import React from 'react'\n// import { Route } from 'react-router-dom'\n\n//# sourceURL=webpack:///./src/Routes.js?");
 
 /***/ }),
 
@@ -1757,6 +1757,66 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
+/***/ "./src/pages/Translation/index.js":
+/*!****************************************!*\
+  !*** ./src/pages/Translation/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nvar _store = __webpack_require__(/*! ./store */ \"./src/pages/Translation/store/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n// 同构: 一套代码React代码, 在服务器执行一次, 再在客户端执行一次\nvar Translation = function (_PureComponent) {\n  _inherits(Translation, _PureComponent);\n\n  function Translation() {\n    _classCallCheck(this, Translation);\n\n    return _possibleConstructorReturn(this, (Translation.__proto__ || Object.getPrototypeOf(Translation)).apply(this, arguments));\n  }\n\n  _createClass(Translation, [{\n    key: 'getList',\n    value: function getList() {\n      var list = this.props.list;\n\n      return list.map(function (item) {\n        return _react2.default.createElement(\n          'div',\n          { key: item.get('id') },\n          item.get('title')\n        );\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var login = this.props.login;\n\n      return login ? _react2.default.createElement(\n        'div',\n        null,\n        this.getList()\n      ) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });\n    }\n  }, {\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      if (this.props.list.isEmpty()) {\n        this.props.getTranslationList();\n      }\n    }\n  }]);\n\n  return Translation;\n}(_react.PureComponent);\n\nTranslation.loadData = function (store) {\n  return store.dispatch(_store.actionCreators.getTranslationList());\n};\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    login: state.getIn(['header', 'login']),\n    list: state.getIn(['translation', 'translationList'])\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    getTranslationList: function getTranslationList() {\n      dispatch(_store.actionCreators.getTranslationList());\n    }\n  };\n};\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Translation);\n\n//# sourceURL=webpack:///./src/pages/Translation/index.js?");
+
+/***/ }),
+
+/***/ "./src/pages/Translation/store/actionCreators.js":
+/*!*******************************************************!*\
+  !*** ./src/pages/Translation/store/actionCreators.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.getTranslationList = undefined;\n\nvar _immutable = __webpack_require__(/*! immutable */ \"./node_modules/immutable/dist/immutable.js\");\n\nvar _actionTypes = __webpack_require__(/*! ./actionTypes */ \"./src/pages/Translation/store/actionTypes.js\");\n\nvar types = _interopRequireWildcard(_actionTypes);\n\nfunction _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }\n\nvar changeTranslationList = function changeTranslationList(list) {\n  return {\n    type: types.CHANGE_TRANSLATION_LIST,\n    list: (0, _immutable.fromJS)(list)\n  };\n};\n\nvar getTranslationList = exports.getTranslationList = function getTranslationList() {\n  return function (dispatch, getState, axiosInstance) {\n    return axiosInstance.get('/api/translations.json?secret=D37msjPeC3').then(function (res) {\n      dispatch(changeTranslationList(res.data.data));\n    }).catch(function (err) {\n      console.log('TCL: getTranslationList -> err', err);\n    });\n  };\n};\n\n//# sourceURL=webpack:///./src/pages/Translation/store/actionCreators.js?");
+
+/***/ }),
+
+/***/ "./src/pages/Translation/store/actionTypes.js":
+/*!****************************************************!*\
+  !*** ./src/pages/Translation/store/actionTypes.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar CHANGE_TRANSLATION_LIST = exports.CHANGE_TRANSLATION_LIST = 'home/CHANGE_TRANSLATION_LIST';\n\n//# sourceURL=webpack:///./src/pages/Translation/store/actionTypes.js?");
+
+/***/ }),
+
+/***/ "./src/pages/Translation/store/index.js":
+/*!**********************************************!*\
+  !*** ./src/pages/Translation/store/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.types = exports.actionCreators = exports.reducer = undefined;\n\nvar _reducer = __webpack_require__(/*! ./reducer */ \"./src/pages/Translation/store/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nvar _actionCreators = __webpack_require__(/*! ./actionCreators */ \"./src/pages/Translation/store/actionCreators.js\");\n\nvar actionCreators = _interopRequireWildcard(_actionCreators);\n\nvar _actionTypes = __webpack_require__(/*! ./actionTypes */ \"./src/pages/Translation/store/actionTypes.js\");\n\nvar types = _interopRequireWildcard(_actionTypes);\n\nfunction _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.reducer = _reducer2.default;\nexports.actionCreators = actionCreators;\nexports.types = types;\n\n//# sourceURL=webpack:///./src/pages/Translation/store/index.js?");
+
+/***/ }),
+
+/***/ "./src/pages/Translation/store/reducer.js":
+/*!************************************************!*\
+  !*** ./src/pages/Translation/store/reducer.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _immutable = __webpack_require__(/*! immutable */ \"./node_modules/immutable/dist/immutable.js\");\n\nvar _actionTypes = __webpack_require__(/*! ./actionTypes */ \"./src/pages/Translation/store/actionTypes.js\");\n\nvar types = _interopRequireWildcard(_actionTypes);\n\nfunction _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }\n\nvar defaultState = (0, _immutable.fromJS)({\n  translationList: []\n});\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;\n  var action = arguments[1];\n\n  switch (action.type) {\n    case types.CHANGE_TRANSLATION_LIST:\n      return state.set('translationList', action.list);\n    default:\n      return state;\n  }\n};\n\n//# sourceURL=webpack:///./src/pages/Translation/store/reducer.js?");
+
+/***/ }),
+
 /***/ "./src/server/request.js":
 /*!*******************************!*\
   !*** ./src/server/request.js ***!
@@ -1777,7 +1837,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.getServerStore = exports.getClientStore = undefined;\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/es/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducer = __webpack_require__(/*! ./reducer */ \"./src/store/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nvar _immutable = __webpack_require__(/*! immutable */ \"./node_modules/immutable/dist/immutable.js\");\n\nvar _request = __webpack_require__(/*! ../client/request */ \"./src/client/request.js\");\n\nvar _request2 = _interopRequireDefault(_request);\n\nvar _request3 = __webpack_require__(/*! ../server/request */ \"./src/server/request.js\");\n\nvar _request4 = _interopRequireDefault(_request3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar composeEnhancers = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : _redux.compose;\n\nvar getClientStore = exports.getClientStore = function getClientStore() {\n  // 客户端脱水\n  var defauleState = (0, _immutable.fromJS)(window.context);\n  return (0, _redux.createStore)(_reducer2.default, defauleState, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(_request2.default))));\n};\nvar getServerStore = exports.getServerStore = function getServerStore(req) {\n  return (0, _redux.createStore)(_reducer2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument((0, _request4.default)(req)))));\n};\n\n//# sourceURL=webpack:///./src/store/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.getServerStore = exports.getClientStore = undefined;\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/es/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducer = __webpack_require__(/*! ./reducer */ \"./src/store/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nvar _immutable = __webpack_require__(/*! immutable */ \"./node_modules/immutable/dist/immutable.js\");\n\nvar _request = __webpack_require__(/*! ../client/request */ \"./src/client/request.js\");\n\nvar _request2 = _interopRequireDefault(_request);\n\nvar _request3 = __webpack_require__(/*! ../server/request */ \"./src/server/request.js\");\n\nvar _request4 = _interopRequireDefault(_request3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar composeEnhancers = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : _redux.compose;\n\n// 改变客户端的store,一定要使用clientAxios\nvar getClientStore = exports.getClientStore = function getClientStore() {\n  // 客户端脱水\n  var defauleState = (0, _immutable.fromJS)(window.context);\n  return (0, _redux.createStore)(_reducer2.default, defauleState, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(_request2.default))));\n};\n\n// 改变服务端的store,一定要使用serverAxios\nvar getServerStore = exports.getServerStore = function getServerStore(req) {\n  return (0, _redux.createStore)(_reducer2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument((0, _request4.default)(req)))));\n};\n\n//# sourceURL=webpack:///./src/store/index.js?");
 
 /***/ }),
 
@@ -1789,7 +1849,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _reduxImmutable = __webpack_require__(/*! redux-immutable */ \"./node_modules/redux-immutable/dist/index.js\");\n\nvar _store = __webpack_require__(/*! ../common/Header/store */ \"./src/common/Header/store/index.js\");\n\nvar _store2 = __webpack_require__(/*! ../pages/Home/store */ \"./src/pages/Home/store/index.js\");\n\nexports.default = (0, _reduxImmutable.combineReducers)({\n  header: _store.reducer,\n  home: _store2.reducer\n});\n\n//# sourceURL=webpack:///./src/store/reducer.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _reduxImmutable = __webpack_require__(/*! redux-immutable */ \"./node_modules/redux-immutable/dist/index.js\");\n\nvar _store = __webpack_require__(/*! ../common/Header/store */ \"./src/common/Header/store/index.js\");\n\nvar _store2 = __webpack_require__(/*! ../pages/Home/store */ \"./src/pages/Home/store/index.js\");\n\nvar _store3 = __webpack_require__(/*! ../pages/Translation/store */ \"./src/pages/Translation/store/index.js\");\n\nexports.default = (0, _reduxImmutable.combineReducers)({\n  header: _store.reducer,\n  home: _store2.reducer,\n  translation: _store3.reducer\n});\n\n//# sourceURL=webpack:///./src/store/reducer.js?");
 
 /***/ })
 
