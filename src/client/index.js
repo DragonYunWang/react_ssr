@@ -6,7 +6,7 @@ import Home from '../pages/Home'
 const App = () => {
   return (
     <BrowserRouter>
-      <Route to="/home" component={Home} />
+      <Route to="/" component={Home} />
     </BrowserRouter>
   )
 }
